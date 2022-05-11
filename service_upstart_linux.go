@@ -202,7 +202,7 @@ func (s *upstart) Run() (err error) {
 }
 
 func (s *upstart) Status() (Status, error) {
-	exitCode, out, err := runWithOutput("initctl", "status", s.Name)
+	exitCode, out, err := runWithOutput("/sbin/initctl", "status", s.Name)
 	if exitCode == 0 && err != nil {
 		return StatusUnknown, err
 	}
@@ -218,15 +218,15 @@ func (s *upstart) Status() (Status, error) {
 }
 
 func (s *upstart) Start() error {
-	return run("initctl", "start", s.Name)
+	return run("/sbin/initctl", "start", s.Name)
 }
 
 func (s *upstart) Stop() error {
-	return run("initctl", "stop", s.Name)
+	return run("/sbin/initctl", "stop", s.Name)
 }
 
 func (s *upstart) Restart() error {
-	return run("initctl", "restart", s.Name)
+	return run("/sbin/initctl", "restart", s.Name)
 }
 
 // The upstart script should stop with an INT or the Go runtime will terminate
